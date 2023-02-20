@@ -1,0 +1,5 @@
+name "dtilengine"
+description "Binding for Tilengine a 2D graphics engine with raster effects for retro/classic style game development"
+authors "XXIV"
+copyright "Copyright © 2023, XXIV"
+license "MPL-2.0"
