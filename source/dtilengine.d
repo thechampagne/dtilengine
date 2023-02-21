@@ -10,14 +10,14 @@ enum TILENGINE_HEADER_VERSION = (TILENGINE_VER_MAJ << 16) | (TILENGINE_VER_MIN <
 /*! tile/sprite flags. Can be none or a combination of the following: */
 enum TLN_TileFlags
 {
-    FLAG_NONE = 0, /*!< no flags */
-    FLAG_FLIPX = (1 << 15), /*!< horizontal flip */
-    FLAG_FLIPY = (1 << 14), /*!< vertical flip */
-    FLAG_ROTATE = (1 << 13), /*!< row/column flip (unsupported, Tiled compatibility) */
-    FLAG_PRIORITY = (1 << 12), /*!< tile goes in front of sprite layer */
-    FLAG_MASKED = (1 << 11), /*!< sprite won't be drawn inside masked region */
-    FLAG_TILESET = 7 << 8, /*!< tileset index (0 - 7) */
-    FLAG_PALETTE = 7 << 5 /*!< palette index (0 - 7) */
+    NONE = 0, /*!< no flags */
+    FLIPX = (1 << 15), /*!< horizontal flip */
+    FLIPY = (1 << 14), /*!< vertical flip */
+    ROTATE = (1 << 13), /*!< row/column flip (unsupported, Tiled compatibility) */
+    PRIORITY = (1 << 12), /*!< tile goes in front of sprite layer */
+    MASKED = (1 << 11), /*!< sprite won't be drawn inside masked region */
+    TILESET = 7 << 8, /*!< tileset index (0 - 7) */
+    PALETTE = 7 << 5 /*!< palette index (0 - 7) */
 }
 
 /*!
@@ -25,16 +25,16 @@ enum TLN_TileFlags
  */
 enum TLN_Blend
 {
-    BLEND_NONE = 0, /*!< blending disabled */
-    BLEND_MIX25 = 1, /*!< color averaging 1 */
-    BLEND_MIX50 = 2, /*!< color averaging 2 */
-    BLEND_MIX75 = 3, /*!< color averaging 3 */
-    BLEND_ADD = 4, /*!< color is always brighter (simulate light effects) */
-    BLEND_SUB = 5, /*!< color is always darker (simulate shadow effects) */
-    BLEND_MOD = 6, /*!< color is always darker (simulate shadow effects) */
-    BLEND_CUSTOM = 7, /*!< user provided blend function with TLN_SetCustomBlendFunction() */
+    NONE = 0, /*!< blending disabled */
+    MIX25 = 1, /*!< color averaging 1 */
+    MIX50 = 2, /*!< color averaging 2 */
+    MIX75 = 3, /*!< color averaging 3 */
+    ADD = 4, /*!< color is always brighter (simulate light effects) */
+    SUB = 5, /*!< color is always darker (simulate shadow effects) */
+    MOD = 6, /*!< color is always darker (simulate shadow effects) */
+    CUSTOM = 7, /*!< user provided blend function with TLN_SetCustomBlendFunction() */
     MAX_BLEND = 8,
-    BLEND_MIX = BLEND_MIX50
+    MIX = MIX50
 }
 
 /*!
@@ -42,10 +42,10 @@ enum TLN_Blend
  */
 enum TLN_LayerType
 {
-    LAYER_NONE = 0, /*!< undefined */
-    LAYER_TILE = 1, /*!< tilemap-based layer */
-    LAYER_OBJECT = 2, /*!< objects layer */
-    LAYER_BITMAP = 3 /*!< bitmapped layer */
+    NONE = 0, /*!< undefined */
+    TILE = 1, /*!< tilemap-based layer */
+    OBJECT = 2, /*!< objects layer */
+    BITMAP = 3 /*!< bitmapped layer */
 }
 
 /*! Affine transformation parameters */
@@ -173,9 +173,9 @@ enum TLN_OVERLAY_CUSTOM = 0;
 /*! types of built-in CRT effect for \ref TLN_ConfigCRTEffect */
 enum TLN_CRT
 {
-    TLN_CRT_SLOT = 0, /*!< slot mask without scanlines, similar to legacy effect */
-    TLN_CRT_APERTURE = 1, /*!< aperture grille with scanlines (matrix-like dot arrangement) */
-    TLN_CRT_SHADOW = 2 /*!< shadow mask with scanlines, diagonal subpixel arrangement */
+    SLOT = 0, /*!< slot mask without scanlines, similar to legacy effect */
+    APERTURE = 1, /*!< aperture grille with scanlines (matrix-like dot arrangement) */
+    SHADOW = 2 /*!< shadow mask with scanlines, diagonal subpixel arrangement */
 }
 
 /*! pixel mapping for TLN_SetLayerPixelMapping() */
@@ -246,35 +246,35 @@ enum TLN_Player
 /*! Standard inputs query for TLN_GetInput() */
 enum TLN_Input
 {
-    INPUT_NONE = 0, /*!< no input */
-    INPUT_UP = 1, /*!< up direction */
-    INPUT_DOWN = 2, /*!< down direction */
-    INPUT_LEFT = 3, /*!< left direction */
-    INPUT_RIGHT = 4, /*!< right direction */
-    INPUT_BUTTON1 = 5, /*!< 1st action button */
-    INPUT_BUTTON2 = 6, /*!< 2nd action button */
-    INPUT_BUTTON3 = 7, /*!< 3th action button */
-    INPUT_BUTTON4 = 8, /*!< 4th action button */
-    INPUT_BUTTON5 = 9, /*!< 5th action button */
-    INPUT_BUTTON6 = 10, /*!< 6th action button */
-    INPUT_START = 11, /*!< Start button */
-    INPUT_QUIT = 12, /*!< Window close (only Player 1 keyboard) */
-    INPUT_CRT = 13, /*!< CRT toggle (only Player 1 keyboard) */
+    NONE = 0, /*!< no input */
+    UP = 1, /*!< up direction */
+    DOWN = 2, /*!< down direction */
+    LEFT = 3, /*!< left direction */
+    RIGHT = 4, /*!< right direction */
+    BUTTON1 = 5, /*!< 1st action button */
+    BUTTON2 = 6, /*!< 2nd action button */
+    BUTTON3 = 7, /*!< 3th action button */
+    BUTTON4 = 8, /*!< 4th action button */
+    BUTTON5 = 9, /*!< 5th action button */
+    BUTTON6 = 10, /*!< 6th action button */
+    START = 11, /*!< Start button */
+    QUIT = 12, /*!< Window close (only Player 1 keyboard) */
+    CRT = 13, /*!< CRT toggle (only Player 1 keyboard) */
 
     /* ... up to 32 unique inputs */
 
-    INPUT_P1 = TLN_Player.PLAYER1 << 5, /*!< request player 1 input (default) */
-    INPUT_P2 = TLN_Player.PLAYER2 << 5, /*!< request player 2 input */
-    INPUT_P3 = TLN_Player.PLAYER3 << 5, /*!< request player 3 input */
-    INPUT_P4 = TLN_Player.PLAYER4 << 5, /*!< request player 4 input */
+    P1 = TLN_Player.PLAYER1 << 5, /*!< request player 1 input (default) */
+    P2 = TLN_Player.PLAYER2 << 5, /*!< request player 2 input */
+    P3 = TLN_Player.PLAYER3 << 5, /*!< request player 3 input */
+    P4 = TLN_Player.PLAYER4 << 5, /*!< request player 4 input */
 
     /* compatibility symbols for pre-1.18 input model */
-    INPUT_A = INPUT_BUTTON1,
-    INPUT_B = INPUT_BUTTON2,
-    INPUT_C = INPUT_BUTTON3,
-    INPUT_D = INPUT_BUTTON4,
-    INPUT_E = INPUT_BUTTON5,
-    INPUT_F = INPUT_BUTTON6
+    A = BUTTON1,
+    B = BUTTON2,
+    C = BUTTON3,
+    D = BUTTON4,
+    E = BUTTON5,
+    F = BUTTON6
 }
 
 /*! CreateWindow flags. Can be none or a combination of the following: */
@@ -293,35 +293,35 @@ enum
 /*! Error codes */
 enum TLN_Error
 {
-    TLN_ERR_OK = 0, /*!< No error */
-    TLN_ERR_OUT_OF_MEMORY = 1, /*!< Not enough memory */
-    TLN_ERR_IDX_LAYER = 2, /*!< Layer index out of range */
-    TLN_ERR_IDX_SPRITE = 3, /*!< Sprite index out of range */
-    TLN_ERR_IDX_ANIMATION = 4, /*!< Animation index out of range */
-    TLN_ERR_IDX_PICTURE = 5, /*!< Picture or tile index out of range */
-    TLN_ERR_REF_TILESET = 6, /*!< Invalid TLN_Tileset reference */
-    TLN_ERR_REF_TILEMAP = 7, /*!< Invalid TLN_Tilemap reference */
-    TLN_ERR_REF_SPRITESET = 8, /*!< Invalid TLN_Spriteset reference */
-    TLN_ERR_REF_PALETTE = 9, /*!< Invalid TLN_Palette reference */
-    TLN_ERR_REF_SEQUENCE = 10, /*!< Invalid TLN_Sequence reference */
-    TLN_ERR_REF_SEQPACK = 11, /*!< Invalid TLN_SequencePack reference */
-    TLN_ERR_REF_BITMAP = 12, /*!< Invalid TLN_Bitmap reference */
-    TLN_ERR_NULL_POINTER = 13, /*!< Null pointer as argument */
-    TLN_ERR_FILE_NOT_FOUND = 14, /*!< Resource file not found */
-    TLN_ERR_WRONG_FORMAT = 15, /*!< Resource file has invalid format */
-    TLN_ERR_WRONG_SIZE = 16, /*!< A width or height parameter is invalid */
-    TLN_ERR_UNSUPPORTED = 17, /*!< Unsupported function */
-    TLN_ERR_REF_LIST = 18, /*!< Invalid TLN_ObjectList reference */
-    TLN_ERR_IDX_PALETTE = 19, /*!< Palette index out of range */
-    TLN_MAX_ERR = 20
+    OK = 0, /*!< No error */
+    OUT_OF_MEMORY = 1, /*!< Not enough memory */
+    IDX_LAYER = 2, /*!< Layer index out of range */
+    IDX_SPRITE = 3, /*!< Sprite index out of range */
+    IDX_ANIMATION = 4, /*!< Animation index out of range */
+    IDX_PICTURE = 5, /*!< Picture or tile index out of range */
+    REF_TILESET = 6, /*!< Invalid TLN_Tileset reference */
+    REF_TILEMAP = 7, /*!< Invalid TLN_Tilemap reference */
+    REF_SPRITESET = 8, /*!< Invalid TLN_Spriteset reference */
+    REF_PALETTE = 9, /*!< Invalid TLN_Palette reference */
+    REF_SEQUENCE = 10, /*!< Invalid TLN_Sequence reference */
+    REF_SEQPACK = 11, /*!< Invalid TLN_SequencePack reference */
+    REF_BITMAP = 12, /*!< Invalid TLN_Bitmap reference */
+    NULL_POINTER = 13, /*!< Null pointer as argument */
+    FILE_NOT_FOUND = 14, /*!< Resource file not found */
+    WRONG_FORMAT = 15, /*!< Resource file has invalid format */
+    WRONG_SIZE = 16, /*!< A width or height parameter is invalid */
+    UNSUPPORTED = 17, /*!< Unsupported function */
+    REF_LIST = 18, /*!< Invalid TLN_ObjectList reference */
+    IDX_PALETTE = 19, /*!< Palette index out of range */
+    MAX_ERR = 20
 }
 
 /*! Debug level */
 enum TLN_LogLevel
 {
-    TLN_LOG_NONE = 0, /*!< Don't print anything (default) */
-    TLN_LOG_ERRORS = 1, /*!< Print only runtime errors */
-    TLN_LOG_VERBOSE = 2 /*!< Print everything */
+    NONE = 0, /*!< Don't print anything (default) */
+    ERRORS = 1, /*!< Print only runtime errors */
+    VERBOSE = 2 /*!< Print everything */
 }
 
 
